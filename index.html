@@ -1,28 +1,63 @@
-\<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do List</title>
+    <title>Advanced Task Manager</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>To-Do List</h1>
-        <p class="subtitle">Add tasks and keep your day organized!</p>
+        <h1>Advanced Task Manager</h1>
+        <p class="subtitle">Organize your tasks more efficiently!</p>
         
+        <!-- Feedback Message System -->
+        <div id="feedbackMessage" class="feedback-message"></div>
+        
+        <!-- Add Task Section -->
         <div class="input-container">
             <input 
                 type="text" 
                 id="taskInput" 
                 placeholder="What needs to be done?"
                 autocomplete="off"
+                maxlength="200"
             >
-            <button id="addBtn">Add</button>
+            
+            <select id="categorySelect">
+                <option value="personal">Personal 👤</option>
+                <option value="work">Work 🏢</option>
+                <option value="urgent">Urgent 🚨</option>
+                <option value="other">Other 📌</option>
+            </select>
+            
+            <button id="addBtn">Add Task</button>
         </div>
 
+        <!-- Search and Controls Section -->
+        <div class="controls-section">
+            <div class="search-container">
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    placeholder="Search tasks...🔍"
+                    autocomplete="off"
+                >
+            </div>
+            
+            <div class="filter-container">
+                <button class="filter-btn" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="active">Active</button>
+                <button class="filter-btn" data-filter="completed">Completed</button>
+                <button class="filter-btn" data-filter="work">Work 🏢</button>
+                <button class="filter-btn" data-filter="personal">Personal 👤</button>
+                <button class="filter-btn" data-filter="urgent">Urgent 🚨</button>
+            </div>
+        </div>
+
+        <!-- Task List -->
         <ul id="todoList">
-            <!-- Empty state - visible by default -->
+            <!-- Empty state -->
             <div class="empty-state" id="emptyState">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M9 11l3 3L22 4"></path>
@@ -32,8 +67,34 @@
             </div>
         </ul>
 
+        <!-- Statistics Section -->
         <div class="stats">
-            <span id="statsText">No tasks yet. Add one to get started!</span>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number" id="totalCount">0</span>
+                    <span class="stat-label">Total</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="activeCount">0</span>
+                    <span class="stat-label">Active</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="completedCount">0</span>
+                    <span class="stat-label">Completed</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="completionRate">0%</span>
+                    <span class="stat-label">Complete</span>
+                </div>
+            </div>
+            
+            <!-- Category Breakdown -->
+            <div class="category-stats" id="categoryStats"></div>
+        </div>
+
+        <!-- Clear All Button -->
+        <div class="actions-footer">
+            <button class="clear-all-btn" id="clearAllBtn">Clear All Tasks 🗑️</button>
         </div>
     </div>
 
