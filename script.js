@@ -45,9 +45,13 @@ function loadTasks() {
         const saved = localStorage.getItem('myTasks');
         if (saved) {
             tasks = JSON.parse(saved);
+            console.log('Loaded ' + tasks.length + ' task(s) from localStorage');
+            console.log('Tasks:', tasks);
+        } else {
+            console.log(' No saved tasks found. Starting fresh!');
         }
     } catch (error) {
-        console.log('Error loading tasks');
+        console.log(' Error loading tasks:', error);
         tasks = [];
     }
 }
@@ -56,8 +60,10 @@ function loadTasks() {
 function saveTasks() {
     try {
         localStorage.setItem('myTasks', JSON.stringify(tasks));
+        console.log(' Saved ' + tasks.length + ' task(s) to localStorage');
+        console.log('Current tasks:', tasks);
     } catch (error) {
-        console.log('Error saving tasks');
+        console.log(' Error saving tasks:', error);
     }
 }
 
@@ -443,4 +449,5 @@ clearBtn.addEventListener('click', clearAllTasks);
 loadTasks();
 renderTasks();
 
-console.log('Task Manager loaded with sidebar!');
+console.log(' Task Manager loaded with sidebar!');
+console.log(' Total tasks in app: ' + tasks.length);
